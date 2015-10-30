@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	
+	<bean id="user" class="com.dy.springIOC.model.User" >
+		<property name="id" value="000"></property>
+		<property name="name" value="rerre"></property>
+	</bean>
+	<!-- 这里创建bean相当于new一个对象，scope默认是单例，当创建多个对象，每个的内容不用时，需要将scope设置为多例 -->
+	<!-- name是action中的get和set方法的属性，ref是bean文件中配置的id -->
+	<bean id="userAction" class="com.dy.springIOC.action.UserAction" scope="prototype">
+		
+		<property name="services" ref="userServices"></property>
+		<!-- 注入上面添加的属性，用ref进行指定 -->
+		<property name="user" ref="user"></property>
+		<!-- 注入其他属性 -->
+		<property name="nameList">
+			<list>
+			 <value>123</value>
+			 <value>45</value>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- 竟然是错误？ -->
+	 <!-- 
+	<bean id="userAction" class="com.dy.springIOC.action.UserAction" scope="prototype" >
+		<constructor-arg ref="userServices"></constructor-arg>
+	</bean>
+	 -->
+	
+	<bean id="userDao" class="com.dy.springIOC.dao.Dao">
+	
+		
+	</bean>
+	<bean id="userServices" class="com.dy.springIOC.service.Services">
+		<property name="iDao" ref="userDao"></property>
+	</bean>
+	
+
+
+</beans>
