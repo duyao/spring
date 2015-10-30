@@ -13,6 +13,7 @@ public class WebController {
 	
 	@RequestMapping(value = "/staticPage", method = RequestMethod.GET)
 	public String redirect(){
+		System.out.println("redirect:/pages/final.html");
 		return "redirect:/pages/final.html";
 	}
 }
